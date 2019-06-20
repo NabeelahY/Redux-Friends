@@ -33,3 +33,14 @@ export const login = (username, password) => dispatch => {
     })
     .catch(err => console.log(err.message));
 };
+
+
+export const addFriend = ({newFriend}) => dispatch => {
+    return axiosImproved()
+    .post('http://localhost:5000/api/friends', ...newFriend)
+    .then(res => {
+        console.log(res.data)
+        dispatch(getFriends())
+    })
+    .catch(err => console.log(err.message));
+}
