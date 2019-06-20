@@ -34,12 +34,22 @@ export const login = (username, password) => dispatch => {
     .catch(err => console.log(err.message));
 };
 
-export const addFriend = ( name, age, email ) => dispatch => {
-   return axiosImproved()
+export const addFriend = (name, age, email) => dispatch => {
+  return axiosImproved()
     .post("http://localhost:5000/api/friends", { name, age, email })
     .then(res => {
       console.log(res.data);
       dispatch(getFriends());
     })
     .catch(err => console.log(err.message));
+};
+
+export const deleteFriend = id => dispatch => {
+   axiosImproved()
+    .delete(`http://localhost:5000/api/friends/${id}`)
+    .then(res => {
+      console.log(res.data);
+      dispatch(getFriends());
+    })
+    .catch(err => console.log(err.message))
 };
