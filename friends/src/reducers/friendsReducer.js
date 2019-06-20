@@ -1,4 +1,4 @@
-import { FRIENDS_LOAD, FRIENDS_SUCCESS, FRIENDS_FAILURE } from "../reducers";
+import { FRIENDS_LOAD, FRIENDS_SUCCESS, FRIENDS_FAILURE } from "../actions";
 
 const initialState = {
   friends: [],
@@ -6,7 +6,7 @@ const initialState = {
   error: ""
 };
 
-const friendsReducer = (state = initialState, action) => {
+export const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FRIENDS_LOAD:
       return {
@@ -28,5 +28,3 @@ const friendsReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default friendsReducer;
