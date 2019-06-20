@@ -16,3 +16,11 @@ export const getFriends = () => dispatch => {
       dispatch({ type: FRIENDS_FAILURE, payload: err.message });
     });
 };
+
+export const login = (username, password) => dispatch => {
+    axios.post('http://localhost:3000/api/login', {username, password})
+    .then(res => {
+        localStorage.setItem('token', res.data.token)
+    })
+    .catch(err => console.log(err.message))
+} 
