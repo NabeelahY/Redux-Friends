@@ -3,15 +3,20 @@ import { connect } from 'react-redux';
 import { login } from '../actions'
 
 const Login = props => { 
+    console.log(props)
     const usernameRef = React.createRef()
 
     const passwordRef = React.createRef()
 
-    const userLogin = () => {
+    const userLogin = (e) => {
+        e.preventDefault()
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
 
-        props.login(username,password)
+        props.login(username, password)
+        .then(() => {
+            props.history.push('/protected')
+        })
     }
 
     return (

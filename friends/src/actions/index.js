@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosImproved from "../axios";
 
 export const FRIENDS_LOAD = "FRIENDS_LOAD";
 export const FRIENDS_SUCCESS = "FRIENDS_SUCCESS";
@@ -7,7 +8,7 @@ export const FRIENDS_FAILURE = "FRIENDS_FAILURE";
 export const getFriends = () => dispatch => {
   dispatch({ type: FRIENDS_LOAD });
 
-  axios
+  axiosImproved()
     .get("http://localhost:5000/api/friends")
     .then(res => {
       dispatch({ type: FRIENDS_SUCCESS, payload: res.data });
@@ -18,9 +19,10 @@ export const getFriends = () => dispatch => {
 };
 
 export const login = (username, password) => dispatch => {
-    axios.post('http://localhost:3000/api/login', {username, password})
+  return axios
+    .post("http://localhost:5000/api/login", { username, password })
     .then(res => {
-        localStorage.setItem('token', res.data.token)
+      localStorage.setItem("token", res.data.payload);
     })
-    .catch(err => console.log(err.message))
-} 
+    .catch(err => console.log(err.message));
+};
