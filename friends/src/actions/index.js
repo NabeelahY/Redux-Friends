@@ -18,11 +18,18 @@ export const getFriends = () => dispatch => {
     });
 };
 
+export const LOGIN_LOAD = "LOGIN_LOAD";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
+
 export const login = (username, password) => dispatch => {
-  return axios
+  dispatch({ type: LOGIN_LOAD });
+  axios
     .post("http://localhost:5000/api/login", { username, password })
     .then(res => {
       localStorage.setItem("token", res.data.payload);
+      dispatch(getFriends());
+      dispatch({ type: LOGIN_SUCCESS });
     })
     .catch(err => console.log(err.message));
 };

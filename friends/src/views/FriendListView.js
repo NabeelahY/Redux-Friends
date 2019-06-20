@@ -16,6 +16,7 @@ export class FriendListView extends Component {
       <div>
         <Router>
           <Route
+          {...this.props}
             to="/protected"
             render={() =>
               localStorage.getItem("token") ? (
