@@ -6,6 +6,7 @@ import FriendsList from "../components/FriendsList";
 import Login from "../components/Login";
 // import PropTypes from 'prop-types'
 import { getFriends } from "../actions";
+import FriendForm  from "../components/FriendForm";
 
 export class FriendListView extends Component {
   componentDidMount() {
@@ -32,6 +33,7 @@ export class FriendListView extends Component {
         />
 
         <Route path="/login" render={props => <Login {...props} />} />
+        <Route path="/add-friend" render={props => <FriendForm {...props} />} />
       </Router>
     );
   }
