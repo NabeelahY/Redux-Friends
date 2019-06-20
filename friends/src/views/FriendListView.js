@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import Loader from "react-loader-spinner";
 import FriendsList from "../components/FriendsList";
 import Login from "../components/Login";
 // import PropTypes from 'prop-types'
@@ -13,24 +14,25 @@ export class FriendListView extends Component {
 
   render() {
     return (
-      
-        <Router>
-          
-          <Route
-            exact
-            path="/"
-            render={() =>
-              localStorage.getItem("token") ? (
-                <FriendsList friends={this.props.friends} />
+      <Router>
+        <Route
+          exact
+          path="/"
+          render={() =>
+            localStorage.getItem("token") ? (
+              this.props.loading ? (
+                <Loader type="ThreeDots" color="#ccc" height={80} width={80} />
               ) : (
-                <Redirect to="login" />
+                <FriendsList friends={this.props.friends} />
               )
-            }
-          />
+            ) : (
+              <Redirect to="login" />
+            )
+          }
+        />
 
-          <Route path="/login" render={props => <Login {...props} />} />
-        </Router>
-    
+        <Route path="/login" render={props => <Login {...props} />} />
+      </Router>
     );
   }
 }
