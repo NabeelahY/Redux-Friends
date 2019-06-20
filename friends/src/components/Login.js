@@ -15,6 +15,7 @@ const Login = props => {
     const password = passwordRef.current.value;
 
     props.login(username, password)
+    .then(() => props.history.push('/'))    
   };
 
   return (
@@ -24,7 +25,7 @@ const Login = props => {
         <input type="text" ref={passwordRef} />
         <button type="submit">
           {props.loggingIn ? (
-            <Loader type="ThreeDots" color="#ccc" height={20} width={20} />
+            <Loader type="ThreeDots" color="#ccc" height={80} width={80} />
           ) : (
             "Login"
           )}
@@ -34,12 +35,11 @@ const Login = props => {
   );
 };
 
-// const mapStateToProps = state => ({
-//   loggingIn: state.loginReducer.loggingIn
-// });
+const mapStateToProps = state => ({
+  loggingIn: state.loginReducer.loggingIn
+});
 
 export default connect(
-//   mapStateToProps,
-state => state,
+  mapStateToProps,
   { login, getFriends }
 )(Login);

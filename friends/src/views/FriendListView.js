@@ -13,23 +13,24 @@ export class FriendListView extends Component {
 
   render() {
     return (
-      <div>
+      
         <Router>
+          
           <Route
-          {...this.props}
-            to="/protected"
+            exact
+            path="/"
             render={() =>
               localStorage.getItem("token") ? (
                 <FriendsList friends={this.props.friends} />
               ) : (
-                <Redirect to="/login" />
+                <Redirect to="login" />
               )
             }
           />
 
-          <Route to="/login" render={props => <Login {...props} />} />
+          <Route path="/login" render={props => <Login {...props} />} />
         </Router>
-      </div>
+    
     );
   }
 }

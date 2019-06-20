@@ -24,7 +24,7 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const login = (username, password) => dispatch => {
   dispatch({ type: LOGIN_LOAD });
-  axios
+  return axios
     .post("http://localhost:5000/api/login", { username, password })
     .then(res => {
       localStorage.setItem("token", res.data.payload);
